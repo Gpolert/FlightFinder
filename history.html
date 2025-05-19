@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>История полётов | FlightFinder</title>
+  <style>
+    :root {
+      --bg-color: #f4f4f4;
+      --text-color: #333;
+      --card-bg: #ffffff;
+      --card-border: #ddd;
+      --accent-color: #ffa500;
+    }
+
+    body.dark {
+      --bg-color: #121212;
+      --text-color: #eeeeee;
+      --card-bg: #1e1e1e;
+      --card-border: #333;
+      --accent-color: #ffb84d;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      padding: 2rem;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    h1 {
+      text-align: center;
+      color: var(--accent-color);
+    }
+
+    .flight-history {
+      max-width: 800px;
+      margin: 2rem auto;
+      background: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+
+    .flight {
+      padding: 1rem;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .flight:last-child {
+      border-bottom: none;
+    }
+
+    .flight strong {
+      color: var(--text-color);
+    }
+
+    #themeToggle, #logoutBtn, #backBtn {
+      position: fixed;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 8px;
+      background-color: var(--accent-color);
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: background-color 0.3s;
+    }
+
+    #themeToggle:hover, #logoutBtn:hover, #backBtn:hover {
+      background-color: #e59400;
+    }
+
+    #themeToggle {
+      bottom: 20px;
+      right: 20px;
+      border-radius: 50%;
+      font-size: 20px;
+    }
+
+    #logoutBtn {
+      top: 20px;
+      right: 120px;
+    }
+
+    #backBtn {
+      top: 20px;
+      right: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>История полётов</h1>
+
+  <div class="flight-history">
+    <div class="flight">
+      <strong>Дата:</strong> 2025-05-01<br />
+      <strong>Маршрут:</strong> Москва (SVO) → Париж (CDG)<br />
+      <strong>Самолёт:</strong> Airbus A320
+    </div>
+    <div class="flight">
+      <strong>Дата:</strong> 2025-04-22<br />
+      <strong>Маршрут:</strong> Нью-Йорк (JFK) → Лондон (LHR)<br />
+      <strong>Самолёт:</strong> Boeing 747
+    </div>
+  </div>
+
+  <button id="themeToggle" title="Переключить тему">🌙</button>
+  <button id="logoutBtn">Выйти</button>
+  <button id="backBtn">На главную</button>
+
+  <script>
+    // ТЕМА: сохранение в localStorage
+    const body = document.body;
+    const themeToggle = document.getElementById('themeToggle');
+
+    // Установить тему при загрузке
+    if (localStorage.getItem('theme') === 'dark') {
+      body.classList.add('dark');
+      themeToggle.textContent = '☀️';
+    }
+
+    function toggleTheme() {
+      body.classList.toggle('dark');
+      const isDark = body.classList.contains('dark');
+      themeToggle.textContent = isDark ? '☀️' : '🌙';
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    }
+
+    themeToggle.addEventListener('click', toggleTheme);
+
+    // Выход из аккаунта
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+      localStorage.removeItem('loggedIn');
+      window.location.href = 'index.html';
+    });
+
+    // Назад на главную
+    document.getElementById('backBtn').addEventListener('click', () => {
+      window.location.href = 'index.html';
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FlightFinder</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    if (localStorage.getItem('loggedIn') === 'true') {
+  window.location.href = 'history.html';
+}
+  <div class="container">
+    <header>
+      <h1 class="logo">FlightFinder</h1>
+      <button class="profile-btn" onclick="openProfile()">👤</button>
+    </header>
+
+    <main class="main-layout">
+      <div class="left-panel">
+        <div class="selector">
+          <label for="fromAirport">Откуда:</label>
+          <input list="airports" id="fromAirport" placeholder="Введите аэропорт" />
+        </div>
+
+        <div class="selector">
+          <label for="toAirport">Куда:</label>
+          <input list="airports" id="toAirport" placeholder="Введите аэропорт" />
+          <datalist id="airports">
+            <option value="Шереметьево (SVO)">
+            <option value="Домодедово (DME)">
+            <option value="Пулково (LED)">
+            <option value="Челябинск (CEK)">
+          </datalist>
+        </div>
+
+        <div class="selector plane-select">
+          <label for="planeInput">Выберите самолёт:</label>
+          <input list="planes" id="planeInput" placeholder="Введите самолёт" />
+          <datalist id="planes">
+            <option value="Ил-2">
+            <option value="Wright Flyer">
+            <option value="Concorde">
+          </datalist>
+        </div>
+      </div>
+
+      <div class="right-panel">
+        <img src="world.png" alt="Карта мира" />
+      </div>
+    </main>
+  </div>
+
+  <button id="themeToggle">🌙</button>
+
+  <script src="script.js"></script>
+</body>
+</html>
